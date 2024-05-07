@@ -1,4 +1,4 @@
-New Note Diagram
+# New Note Diagram
 
 ``` mermaid
 
