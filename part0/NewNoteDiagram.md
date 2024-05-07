@@ -12,7 +12,8 @@ sequenceDiagram
     server-->>browser: URL redirect address
     deactivate server
 
-    Note right of browser: Submitting the form sends a POST request to /new_note, so that the server responds with a URL redirect address
+    Note right of browser: Submitting the form sends a POST request to /new_note as specified in the intial HTML of the form.
+The server then adds the content of the body of the POSt request that it receives to a notes array, before responding with a URL redirect address.
     
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
     activate server
