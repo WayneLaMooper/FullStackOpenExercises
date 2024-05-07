@@ -19,12 +19,14 @@ sequenceDiagram
     server-->>browser: HTML document
     deactivate server
 
-    Note right of browser: Because the browser received /notes as the redirect URL address, it will send a GET request to /notes and refresh the page with the response.
+    Note right of browser: Because the browser received /notes as the redirect URL address, <br/> it will send a GET request to /notes and refresh the page with the responding HTML document.
 
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
     activate server
     server-->>browser: the css file
     deactivate server
+
+    Note right of browser: The browser will now sequentially go through the HTML document from top to bottom, <br/> and perform a GET request for any additionally necessary addresses starting with      /main.css
 
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.js
     activate server
@@ -38,5 +40,5 @@ sequenceDiagram
     server-->>browser: [{"content": "HTML is easy", "date": "2023-1-1"},...]
     deactivate server
 
-    Note right of browser: The browser executes the callback function that renders the notes
+    Note right of browser: The browser executes the callback function that renders the notes, which should include the recently submitted new note
 ```
