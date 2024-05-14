@@ -2,7 +2,39 @@ import { useState } from "react"
 
 const Header = ({header}) => <h1>{header}</h1>
 const Button = ({text, onClick}) => <button onClick={onClick}>{text}</button>
-const Display = ({text, count}) => <p>{text} {count}</p>
+
+const StatisticLine = ({text, value}) => {
+  return (
+    <tr>
+      <td>{text}</td> 
+      <td>{value}</td>
+    </tr>
+  )
+}
+
+const Statistics = ({good, neutral, bad}) => {
+  const all = good + neutral + bad
+  const average = (good - bad)/all
+  const positive = [(good/all) * 100, '%'].join(' ')
+
+  if (all === 0) {
+    return (
+      <>No feedback given</>
+    )
+  }
+  return (
+    <table>
+      <tbody>
+        <StatisticLine text='good' value={good}/>
+        <StatisticLine text='neutral' value={neutral}/>
+        <StatisticLine text='bad' value={bad}/>
+        <StatisticLine text='all' value={all}/>
+        <StatisticLine text='average' value={average}/>
+        <StatisticLine text='positive' value={positive}/>
+      </tbody>
+    </table>
+  )
+}
 
 const App = () => {
 
@@ -15,6 +47,8 @@ const App = () => {
   const handlingBad = () => setBad(bad + 1)
 
   const all = good + neutral + bad
+  const average = (good - bad)/all
+  const positive = [(good/all) * 100, '%'].join(' ')
 
   return (
     <div>
@@ -23,12 +57,7 @@ const App = () => {
       <Button text='neutral' onClick={handlingNeutral}/>
       <Button text='bad' onClick={handlingBad}/>
       <Header header='statistics'/>
-      <Display text='good' count={good}/>
-      <Display text='neutral' count={neutral}/>
-      <Display text='bad' count={bad}/>
-      <Display text='all' count={all}/>
-      <Display text='average' count={(good - bad)/(all)}/>
-      <Display text='positive' count={(good/all)*100}/>
+      <Statistics good={good} neutral={neutral} bad={bad}/>
     </div>
   )
 }
